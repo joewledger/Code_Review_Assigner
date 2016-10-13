@@ -1,0 +1,3 @@
+[submodule "qt"]
+	path = Data/qt
+	url = git://github.com/qt/qt.git
