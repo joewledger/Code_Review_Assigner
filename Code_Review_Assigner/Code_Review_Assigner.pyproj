@@ -23,6 +23,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Code_Review_Assigner.py" />
+    <Compile Include="controller\__init__.py" />
+    <Compile Include="model\commitHistory.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="model\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="view\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="model\" />
+    <Folder Include="controller\" />
+    <Folder Include="view\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
