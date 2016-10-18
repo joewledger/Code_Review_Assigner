@@ -1,11 +1,11 @@
-class commitHistory(object):
+class CommitHistory(object):
     """description of class"""
 
     def __init__(self):
         self.commitIDMap = {}
-  
 
-class commit(object):
+
+class Commit(object):
     """description of class"""
 
     def __init__(self, commitID):
@@ -13,7 +13,12 @@ class commit(object):
         self.authors = set()
         self.reviewers = set()
         self.filePathsChanged = set()
-        self.previousCommit = set() #set for merge commits
+        self.previousCommit = set()  # set for merge commits
 
     def getPreviousCommitsInBranch():
-        return set() #recursive
+        return set()  # recursive
+
+
+class Reviewer:
+    def __init__(self):
+        self.score = 0
