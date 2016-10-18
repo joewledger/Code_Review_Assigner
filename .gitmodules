@@ -1,6 +1,3 @@
-[submodule "qt"]
-	path = Data/qt
-	url = git://github.com/qt/qt.git
 [submodule "online"]
 	path = online
 	url = https://github.com/LibreOffice/online.git
