@@ -7,3 +7,6 @@
 [submodule "help"]
 	path = help
 	url = https://github.com/LibreOffice/help.git
+[submodule "qtquickcontrols2"]
+	path = qtquickcontrols2
+	url = https://github.com/qt/qtquickcontrols2.git
