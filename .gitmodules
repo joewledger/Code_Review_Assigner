@@ -1,3 +1,9 @@
 [submodule "online"]
 	path = online
 	url = https://github.com/LibreOffice/online.git
+[submodule "impress_remote"]
+	path = impress_remote
+	url = https://github.com/LibreOffice/impress_remote.git
+[submodule "help"]
+	path = help
+	url = https://github.com/LibreOffice/help.git
