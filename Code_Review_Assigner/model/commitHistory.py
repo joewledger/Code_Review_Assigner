@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from collections import *
 
 class commitHistory(object):
@@ -13,8 +14,16 @@ class commitHistory(object):
         return None
 
 
+=======
+class CommitHistory(object):
+    """description of class"""
 
-class commit(object):
+    def __init__(self):
+        self.commitIDMap = {}
+>>>>>>> f1de8c6ab4f00310b32ada71921ae65e9028c12e
+
+
+class Commit(object):
     """description of class"""
 
     def __init__(self, commitID):
@@ -23,7 +32,19 @@ class commit(object):
         self.authors = set()
         self.reviewers = set()
         self.filePathsChanged = set()
+<<<<<<< HEAD
         self.branches_included_in = set() #set of all branches the given commit is a part of
 
     def getPreviousCommitsInBranch():
         return set() #recursive
+=======
+        self.previousCommit = set()  # set for merge commits
+
+    def getPreviousCommitsInBranch():
+        return set()  # recursive
+
+
+class Reviewer:
+    def __init__(self):
+        self.score = 0
+>>>>>>> f1de8c6ab4f00310b32ada71921ae65e9028c12e

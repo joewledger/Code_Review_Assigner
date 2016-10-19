@@ -36,13 +36,15 @@ def string_alignment(str1, str2, **score):
                 align_mat[i][j] = s3
     return align_mat[row - 1][col - 1]
 
-# This function compares each character in the two comparing string 
+
+# This function compares each character in the two comparing string
 # and returns the compare result using defined scoring schemes
 def char_comp(c1, c2, m, s):
     if c1 == c2:
         return m
     else:
         return s
+
 
 def create_mat(m, n):
     return [[0 for x in range(n)] for y in range(m)]
