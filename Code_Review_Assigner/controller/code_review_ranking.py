@@ -11,6 +11,18 @@ from .string_compare import *
 
 # 2. use all previous commits
 #    include contributors/author for weighting
+commit = Commit
+target_file_paths = Commit.filePathsChanged
+past_commits = commit.get_previous_commits(commit, commitID)
+reviews = set()
+for target_file_path in target_file_paths:
+	for past_commit in past_commits:  # check all the past commits
+        paths_changed = past_commit.filePathsChanged
+        commit_reviewers = past_commit.reviewers
+        for path in paths_changed:  # for each review's reviewed file path
+            score = string_alignment(target_file_path, path)
+            for commit_reviewer in commit_reviewers:
+                commit_reviewer.score += score
 
 # 3. trace current branch to origin
 #    exclude contributors/author for weighting
