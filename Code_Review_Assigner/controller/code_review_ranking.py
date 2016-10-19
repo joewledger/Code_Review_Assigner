@@ -15,6 +15,10 @@ commit = Commit
 target_file_paths = Commit.filePathsChanged
 past_commits = commit.get_previous_commits(commit, commitID)
 reviews = set()
+# need to include contributors/author for weighting
+
+#
+
 for target_file_path in target_file_paths:
 	for past_commit in past_commits:  # check all the past commits
         paths_changed = past_commit.filePathsChanged
