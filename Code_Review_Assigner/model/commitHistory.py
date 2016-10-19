@@ -24,12 +24,6 @@ class Commit(object):
         self.filePathsChanged = set()
         self.branches_included_in = set() #set of all branches the given commit is a part of
 
-    def getPreviousCommitsInBranch():
-        self.previousCommit = set()  # set for merge commits
-
-    def getPreviousCommitsInBranch():
-        return set()  # recursive
-
 
 class Reviewer:
     def __init__(self):
