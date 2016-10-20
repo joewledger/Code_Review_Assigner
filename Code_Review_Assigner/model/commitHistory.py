@@ -18,12 +18,13 @@ class commitHistory(object):
 class Commit(object):
     """description of class"""
 
-    def __init__(self, commitID):
-        self.commitID = commitID
+    def __init__(self, id):
+        self.id = id
         self.timestamp = None
         self.authors = set()
         self.reviewers = set()
         self.filePathsChanged = set()
+        self.parents = set()
         self.branches_included_in = set()  # set of all branches the given commit is a part of
 
 
