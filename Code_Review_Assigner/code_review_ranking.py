@@ -1,5 +1,5 @@
-from ..model.commitHistory import *
-from .string_compare import *
+from commitHistory import *
+from string_compare import *
 
 #                                 branch sensitive?
 #    include          [1. branch,contrib ] [3. !branch,contrib ]
