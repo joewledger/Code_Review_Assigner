@@ -15,6 +15,12 @@ class commitHistory(object):
 
         return None
 
+    def tree_traversal(self, commitID, tree=set()):
+        for parent in self.commitIDMap[commitID].parents:
+            tree.add(parent)
+            tree = self.tree_traversal(parent, tree)
+        return tree
+
 class Commit(object):
     """description of class"""
 
