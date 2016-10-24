@@ -20,7 +20,7 @@ reviews = set()
 #
 
 for target_file_path in target_file_paths:
-	for past_commit in past_commits:  # check all the past commits
+    for past_commit in past_commits:  # check all the past commits
         paths_changed = past_commit.filePathsChanged
         commit_reviewers = past_commit.reviewers
         for path in paths_changed:  # for each review's reviewed file path

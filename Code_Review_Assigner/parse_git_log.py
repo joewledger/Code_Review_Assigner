@@ -21,7 +21,7 @@ def parse(folderPath):
     
     # See http://blog.lost-theory.org/post/how-to-parse-git-log-output/ for a good starting point
     # Note that "--name-only" adds support for displaying the file path names for each modified file
-    pr = subprocess.Popen( 'git log --name-only --format="%s"' % GIT_LOG_FORMAT , cwd = os.path.dirname( folderPath ), shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
+    pr = subprocess.Popen( 'git log --name-only --all --reverse --format="%s"' % GIT_LOG_FORMAT , cwd = os.path.dirname( folderPath ), shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
     (out,err) = pr.communicate()
     # below is a sketch of a single commit represented in the "out" string
     # note the seperating chars and locations of important data
@@ -52,7 +52,7 @@ def parse(folderPath):
             # TODO: parse "reviewed by" out of subject message, this is embedded in metadatum[3]
             # big debate on the next line http://stackoverflow.com/questions/3845423/remove-empty-strings-from-a-list-of-strings
             nextcommit.filePathsChanged = list(filter(None, files[idx]))
-            nextcommit.parents = metadatum[4].split(' ')
+            nextcommit.parents = list(filter(None, metadatum[4].split(' ')))
             history.commitIDMap[nextcommit.id] = nextcommit
     
     return history

@@ -9,11 +9,17 @@ class commitHistory(object):
         self.commitIDMap = OrderedDict()
 
     # Gets all previous commits (as indicated by the commits timestamp).
-    # If branch_id is specified, only commits that are part of that branch are included
-    def get_previous_commits(commit_id, branch_id=None):
-        #branch_id = None all
+    def get_previous_commits(self, commit_id):
+        idx = list(self.commitIDMap).index(commit_id)
+        return set(list(self.commitIDMap)[0:idx])
 
-        return None
+
+    # Gets all previous commits by parent relationship to origin
+    def get_commits_in_tree(self, commitID, tree=set()):
+        for parent in self.commitIDMap[commitID].parents:
+            tree.add(parent)
+            tree = self.get_commits_in_tree(parent, tree)
+        return tree
 
 class Commit(object):
     """description of class"""
