@@ -52,7 +52,7 @@ def parse(folderPath):
             # TODO: parse "reviewed by" out of subject message, this is embedded in metadatum[3]
             # big debate on the next line http://stackoverflow.com/questions/3845423/remove-empty-strings-from-a-list-of-strings
             nextcommit.filePathsChanged = list(filter(None, files[idx]))
-            nextcommit.parents = metadatum[4].split(' ')
+            nextcommit.parents = list(filter(None, metadatum[4].split(' ')))
             history.commitIDMap[nextcommit.id] = nextcommit
     
     return history
