@@ -21,7 +21,7 @@ def parse(folderPath):
     
     # See http://blog.lost-theory.org/post/how-to-parse-git-log-output/ for a good starting point
     # Note that "--name-only" adds support for displaying the file path names for each modified file
-    pr = subprocess.Popen( 'git log --name-only --all --format="%s"' % GIT_LOG_FORMAT , cwd = os.path.dirname( folderPath ), shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
+    pr = subprocess.Popen( 'git log --name-only --all --reverse --format="%s"' % GIT_LOG_FORMAT , cwd = os.path.dirname( folderPath ), shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
     (out,err) = pr.communicate()
     # below is a sketch of a single commit represented in the "out" string
     # note the seperating chars and locations of important data
