@@ -1,5 +1,5 @@
 from collections import *
-
+import Queue.Queue
 
 class commitHistory(object):
     """description of class"""
@@ -16,9 +16,15 @@ class commitHistory(object):
 
     # Gets all previous commits by parent relationship to origin
     def get_commits_in_tree(self, commitID, tree=set()):
-        for parent in self.commitIDMap[commitID].parents:
-            tree.add(parent)
-            tree = self.get_commits_in_tree(parent, tree)
+        current_commits = Queue()
+        current_commits.put(self.commitIDMap[commitID])
+
+        while(not current_commits.empty()):
+            commit = current_commits.get()
+            tree.add(commit)
+            for parent in commit.parents:
+                current_commits.put(parent)
+
         return tree
 
 class Commit(object):
