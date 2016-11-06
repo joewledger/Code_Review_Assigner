@@ -18,9 +18,6 @@ def git_log_output():
     print(output)
 
 
-# checkout_all("qtquickcontrols2")
-
-
 if __name__ == "__main__":
     submodule_name = "qtquickcontrols2"
 

@@ -1,66 +1,70 @@
-# This script does string comparision using Needleman–Wunsch algorithm. 
-# The algorithm essentially divides a large problem into a series of smaller 
-# problems and uses the solutions to the smaller problems to reconstruct a 
-# solution to the larger problem 
+#########################################################################
+# File: stringCompare.py                                                
+# Descriptions: String comparison techniques for file path similarity   
+# Input: The arguments f1, f2 are strings of file path                  
+# Output: Number of common file path components in f1 and f2            
+# Written By: Patanamon Thongtanunam (patanamon-t@is.naist.jp)          
+#########################################################################
 
-# This function constructs the comparing table and defines the scoring schemes.
-# After which it traces through the table with arrows back to orgin
-def string_alignment(str1, str2, **score):
-    # Initialize comparing table
-    row = len(str1) + 1
-    col = len(str2) + 1
+def path2List(fileString):
+    return fileString.split("/")
 
-    # Define scoring schemes
-    m = score.get('match', 1)
-    s = score.get('miss', -1)
-    g = score.get('gap', 0)
+def LCP(f1,f2):
+    f1 = path2List(f1)
+    f2 = path2List(f2)
+    common_path = 0
+    min_length = min(len(f1),len(f2))
+    for i in range(min_length):
+        if f1[i] == f2[i]:
+            common_path += 1
+        else:
+            break
+    return common_path
 
-    # Fill out the table with values using defined scoring schemes
-    align_mat = create_mat(row, col)
-    for i in range(1, row):
-        align_mat[i][0] = align_mat[i - 1][0] + g
-    for j in range(1, col):
-        align_mat[0][j] = align_mat[0][j - 1] + g
+def LCSuff(f1,f2):
+    f1 = path2List(f1)
+    f2 = path2List(f2)
+    common_path = 0
+    r = range(min(len(f1),len(f2)))
+    r.reverse()
+    for i in r:
+        if f1[i] == f2[i]:
+            common_path += 1
+        else:
+            break
+    return common_path
 
-    for i in range(1, row):
-        for j in range(1, col):
-            s1 = align_mat[i - 1][j - 1] + char_comp(str1[i - 1], str2[j - 1], m, s)
-            s2 = align_mat[i - 1][j] + g
-            s3 = align_mat[i][j - 1] + g
+def LCSubstr(f1,f2):
+    f1 = path2List(f1)
+    f2 = path2List(f2)
+    common_path = 0
+    if len( set(f1) & set(f2)) > 0:
+        mat = [[0 for x in range(len(f2)+1)] for x in range(len(f1)+1)]
+        for i in range(len(f1)+1):
+            for j in range(len(f2)+1):
+                if i == 0 or j == 0:
+                    mat[i][j] = 0
+                elif f1[i-1] == f2[j-1]:
+                    mat[i][j] = mat[i-1][j-1] + 1
+                    common_path = max(common_path,mat[i][j])
+                else:
+                    mat[i][j] = 0
+    return common_path
 
-            if s1 == max(s1, s2, s3):
-                align_mat[i][j] = s1
-            elif s2 == max(s1, s2, s3):
-                align_mat[i][j] = s2
-            else:
-                align_mat[i][j] = s3
-    return align_mat[row - 1][col - 1]
-
-
-# This function compares each character in the two comparing string
-# and returns the compare result using defined scoring schemes
-def char_comp(c1, c2, m, s):
-    if c1 == c2:
-        return m
+def LCSubseq(f1,f2):
+    f1 = path2List(f1)
+    f2 = path2List(f2)
+    if len( set(f1) & set(f2)) > 0:
+        L = [[0 for x in range(len(f2)+1)] for x in range(len(f1)+1)]
+        for i in range(len(f1)+1):
+            for j in range(len(f2)+1):
+                if i == 0 or j == 0:
+                    L[i][j] = 0
+                elif f1[i-1] == f2[j-1]:
+                    L[i][j] = L[i-1][j-1] + 1
+                else:
+                    L[i][j] = max(L[i-1][j], L[i][j-1])
+        common_path = L[len(f1)][len(f2)]
     else:
-        return s
-
-
-def create_mat(m, n):
-    return [[0 for x in range(n)] for y in range(m)]
-
-
-def path2list(file_path):
-    return file_path.split("/")
-
-
-def main():
-    str1 = 'AG/TA/ttt'
-    str2 = 'fvf/bgbb/tr/ee/TA/tat'
-    score1 = string_alignment(path2list(str1), path2list(str2), match=1, miss=-1, gap=0)
-    score2 = string_alignment(str1, str2, match=1, miss=-1, gap=0)
-    print(score1)
-    print(score2)
-
-
-if __name__ == '__main__': main()
+        common_path = 0
+    return common_path
