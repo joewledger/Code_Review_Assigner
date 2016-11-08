@@ -1,47 +1,84 @@
-from commitHistory import *
-from string_compare import *
+from .commitHistory import Commit
+from .string_compare import *
 
 #                                 branch sensitive?
 #    include          [1. branch,contrib ] [3. !branch,contrib ]
 #    contributors?    [2. !branch,contrib] [4. !branch,!contrib]
 
-# 1. trace current branch to origin
-#    include contributors/author for weighting
+# 1. Scenario 1:
+# In this scenario, both branches and contributors are included.
+id = 'xxx'
+all_reviewers = []
+commit_t = Commit(id)              # target commit
+commits_p = get_commits_in_tree()   # all past commits set
+file_paths_t = commit_t.filePathsChanged     # file paths changed of target commits
+for c in commits_p:
+    file_paths_p = c.filePathsChanged  # set of past file path changed
+    reviewers_p = c.reviewers          # set of past reviewers
+    authors_p = c.authors            # set of past authors
+    all_reviewers.append(reviewers_p)
+    all_reviewers.append(authors_p)
+    for file_path_p in file_paths_p:
+        for file_path_t in file_paths_t:
+            for r in reviewers_p:
+                r.score += string_compare(file_path_p, file_path_t, method='def your method')
+            for a in authors_p:
+                a.score += string_compare(file_path_p, file_path_t, method='def your method')
+
+# 2. Scenario 2:
+# In this scenario, contributors are included.
+
+id = 'xxx'
+all_reviewers = []
+commit_t = Commit(id)              # target commit
+commits_p = get_commits_in_tree()   # all past commits by time set
+file_paths_t = commit_t.filePathsChanged     # file paths changed of target commits
+for c in commits_p:
+    file_paths_p = c.filePathsChanged  # set of past file path changed
+    reviewers_p = c.reviewers          # set of past reviewers
+    authors_p = c.authors            # set of past authors
+    all_reviewers.append(reviewers_p)
+    all_reviewers.append(authors_p)
+    for file_path_p in file_paths_p:
+        for file_path_t in file_paths_t:
+            for r in reviewers_p:
+                r.score += string_compare(file_path_p, file_path_t, method='def your method')
+            for a in authors_p:
+                a.score += string_compare(file_path_p, file_path_t, method='def your method')
+
+# Scenario 3:
+# In this scenario, branches are included.
+
+id = 'xxx'
+all_reviewers = []
+commit_t = Commit(id)              # target commit
+commits_p = get_commits_in_tree()   # all past commits set
+file_paths_t = commit_t.filePathsChanged     # file paths changed of target commits
+for c in commits_p:
+    file_paths_p = c.filePathsChanged  # set of past file path changed
+    reviewers_p = c.reviewers          # set of past reviewers
+    all_reviewers.append(reviewers_p)
+    for file_path_p in file_paths_p:
+        for file_path_t in file_paths_t:
+            for r in reviewers_p:
+                r.score += string_compare(file_path_p, file_path_t, method='def your method')
 
 
-# 2. use all previous commits
-#    include contributors/author for weighting
-commit = Commit
-target_file_paths = Commit.filePathsChanged
-past_commits = commit.get_previous_commits(commit, commitID)
-reviews = set()
-# need to include contributors/author for weighting
 
-#
+# Scenario 4:
+# In this scenario, neither branches and contributors are included. Actually,
+# this is the original work of RevFinder. Here, we only consider the past commits in master branch and the reviewers only.
 
-for target_file_path in target_file_paths:
-    for past_commit in past_commits:  # check all the past commits
-        paths_changed = past_commit.filePathsChanged
-        commit_reviewers = past_commit.reviewers
-        for path in paths_changed:  # for each review's reviewed file path
-            score = string_alignment(target_file_path, path)
-            for commit_reviewer in commit_reviewers:
-                commit_reviewer.score += score
-
-# 3. trace current branch to origin
-#    exclude contributors/author for weighting
-
-# 4. use all previous commits
-#    exclude contributors/author for weighting
-commit = Commit
-target_file_paths = commit.filePathsChanged
-past_commits = commit.get_previous_commits(commit.commitID)
-reviewers = set()
-for target_file_path in target_file_paths:  # for each paths in commit
-    for past_commit in past_commits:  # check all the past commits
-        paths_changed = past_commit.filePathsChanged
-        commit_reviewers = past_commit.reviewers
-        for path in paths_changed:  # for each review's reviewed file path
-            score = string_alignment(target_file_path, path)
-            for commit_reviewer in commit_reviewers:
-                commit_reviewer.score += score
+id = 'xxx'
+all_reviewers = []
+commit_t = Commit(id)              # target commit
+commits_p = get_commits_in_tree()   # all past commits by time set
+file_paths_t = commit_t.filePathsChanged     # file paths changed of target commits
+for c in commits_p:
+    file_paths_p = c.filePathsChanged  # set of past file path changed
+    reviewers_p = c.reviewers          # set of past reviewers
+    all_reviewers.append(reviewers_p)
+    for file_path_p in file_paths_p:
+        for file_path_t in file_paths_t:
+            for r in reviewers_p:
+                r.score += string_compare(file_path_p, file_path_t, method='def your method')
