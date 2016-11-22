@@ -9,7 +9,7 @@ from .string_compare import *
 # In this scenario, both branches and contributors are included.
 def Scenario_1(id, commitHistory, method):
     all_reviewers = []
-    commit_t = Commit(id)              # target commit
+    commit_t = commitHistory.commitIDMap[id]              # target commit
     commits_p = commitHistory.get_commits_in_tree(id)   # all past commits set
     file_paths_t = commit_t.filePathsChanged     # file paths changed of target commits
     for c in commits_p:
@@ -29,7 +29,7 @@ def Scenario_1(id, commitHistory, method):
 # In this scenario, contributors are included.
 def Scenario_2(id, commitHistory, method):
     all_reviewers = []
-    commit_t = Commit(id)              # target commit
+    commit_t = commitHistory.commitIDMap[id]              # target commit
     commits_p = commitHistory.get_commits_in_tree(id)   # all past commits by time set
     file_paths_t = commit_t.filePathsChanged     # file paths changed of target commits
     for c in commits_p:
@@ -49,7 +49,7 @@ def Scenario_2(id, commitHistory, method):
 # In this scenario, branches are included.
 def Scenario_3(id, commitHistory, method):
     all_reviewers = []
-    commit_t = Commit(id)              # target commit
+    commit_t = commitHistory.commitIDMap[id]              # target commit
     commits_p = commitHistory.get_previous_commits(id)   # all past commits set
     file_paths_t = commit_t.filePathsChanged     # file paths changed of target commits
     for c in commits_p:
@@ -68,7 +68,7 @@ def Scenario_3(id, commitHistory, method):
 # this is the original work of RevFinder. Here, we only consider the past commits in master branch and the reviewers only.
 def Scenario_4(id, commitHistory, method):
     all_reviewers = []
-    commit_t = Commit(id)              # target commit
+    commit_t = commitHistory.commitIDMap[id]              # target commit
     commits_p = commitHistory.get_previous_commits(id)   # all past commits by time set
     file_paths_t = commit_t.filePathsChanged     # file paths changed of target commits
     for c in commits_p:
