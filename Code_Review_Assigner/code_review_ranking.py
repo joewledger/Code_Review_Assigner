@@ -98,21 +98,24 @@ def code_review_ranking(id, commitHistory, **kwargs):
 
         # put new mapping into dic if necessary
         for r in c.reviewers:
-            if r is not all_reviewers:
+            if r not in all_reviewers:
                 all_reviewers[r] = 0
         if scenario is 'scenario1' or 'scenario3':
             for a in c.authors:
-                if a is not all_reviewers:
+                if a not in all_reviewers:
                     all_reviewers[a] = 0
         # calculate score and add to our mapping
         for file_path_p in file_paths_p:
             for file_path_t in file_paths_t:
                 for r in reviewers_p:
-                    all_reviewers[r] += string_compare(file_path_p, file_path_t, method) # increment score
+                    for fpt in file_path_t:
+                        for fpp in file_path_p:
+                            all_reviewers[r] += string_compare(fpp, fpt, method) # increment score
                 if scenario is 'scenario1' or 'scenario3':
                     for a in authors_p:
                         if a in all_reviewers:
-                            all_reviewers[a] += string_compare(file_path_p, file_path_t, method) # increment score
+                            for fpp in file_path_p:
+                                all_reviewers[a] += string_compare(fpp, fpt, method) # increment score
     return all_reviewers
 
 
