@@ -9,7 +9,7 @@ import subprocess
 import os
 import sys
 from datetime import datetime
-from commitHistory import *
+from .commitHistory import *
 
 def parse(folderPath):
     # https://git-scm.com/docs/git-log search "format:<string>"

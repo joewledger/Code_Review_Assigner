@@ -1,5 +1,6 @@
 from collections import *
-import queue.Queue
+from queue import Queue
+
 
 class commitHistory(object):
     """description of class"""
@@ -26,6 +27,7 @@ class commitHistory(object):
                 current_commits.put(self.commitIDMap[parent])
 
         return tree
+
 
 class Commit(object):
     """description of class"""
