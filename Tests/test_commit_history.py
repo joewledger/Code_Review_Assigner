@@ -1,9 +1,10 @@
 import os
-from parse_git_log import *
-from commitHistory import *
+import Code_Review_Assigner.parse_git_log as pgl
+import Code_Review_Assigner.commitHistory as ch
 
-def main(dirPath=os.getcwd()):
-    myCommitHistory = parse(dirPath)
+
+def test_commit_history(dirPath=os.getcwd()):
+    myCommitHistory = pgl.parse(dirPath)
 
     # https://github.com/joewledger/Code_Review_Assigner/commit/61206b44a3511c3252a130144cf3ddaa3ae93029
     commitID = 'f8d4bc0cf7cf7f1ccf1525660f2212edae3c8972'
@@ -12,6 +13,3 @@ def main(dirPath=os.getcwd()):
 
     prev = myCommitHistory.get_previous_commits(commitID)
     print(len(prev))
-
-if __name__ == '__main__': 
-    main()
