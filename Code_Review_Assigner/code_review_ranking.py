@@ -108,15 +108,11 @@ def code_review_ranking(id, commitHistory, **kwargs):
         for file_path_p in file_paths_p:
             for file_path_t in file_paths_t:
                 for r in reviewers_p:
-                    for fpt in file_path_t:
-                        for fpp in file_path_p:
-                            all_reviewers[r] += string_compare(fpp, fpt, method) # increment score
+                    all_reviewers[r] += string_compare(file_path_p, file_path_t, method) # increment score
                 if scenario is 'scenario1' or 'scenario3':
                     for a in authors_p:
                         if a in all_reviewers:
-                            for fpt in file_path_t:
-                                for fpp in file_path_p:
-                                    all_reviewers[a] += string_compare(fpp, fpt, method) # increment score
+                            all_reviewers[a] += string_compare(file_path_p, file_path_t, method) # increment score
     return all_reviewers
 
 
