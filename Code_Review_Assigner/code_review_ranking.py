@@ -80,7 +80,7 @@ def Scenario_4(id, commitHistory, method):
                 for r in reviewers_p:
                     r.score += string_compare(file_path_p, file_path_t, method)
 
-def code_review_ranking(id, commitHistory, **kwargs)
+def code_review_ranking(id, commitHistory, **kwargs):
     method = kwargs.get('method')
     scenario = kwargs.get('scenario')
     all_reviewers = []
