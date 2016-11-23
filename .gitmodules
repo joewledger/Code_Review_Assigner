@@ -10,3 +10,6 @@
 [submodule "qtquickcontrols2"]
 	path = qtquickcontrols2
 	url = https://github.com/qt/qtquickcontrols2.git
+[submodule "Code-Review-Tests"]
+	path = Code-Review-Tests
+	url = https://github.com/kcandow/Code-Review-Tests.git
