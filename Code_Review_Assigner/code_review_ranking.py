@@ -83,7 +83,7 @@ def Scenario_4(id, commitHistory, method):
 def code_review_ranking(id, commitHistory, **kwargs):
     method = kwargs.get('method')
     scenario = kwargs.get('scenario')
-    all_reviewers = []
+    all_reviewers = dict()
     commit_t = commitHistory.commitIDMap[id]  # target commit
     if scenario is 'scenario1' or 'scenario2':
         commits_p = commitHistory.get_commits_in_tree(id)  # all past commits set
@@ -92,15 +92,27 @@ def code_review_ranking(id, commitHistory, **kwargs):
     file_paths_t = commit_t.filePathsChanged  # file paths changed of target commits
     for c in commits_p:
         file_paths_p = c.filePathsChanged  # set of past file path changed
+
         reviewers_p = c.reviewers  # set of past reviewers
         authors_p = c.authors  # set of past authors
-        all_reviewers.append(reviewers_p)
+
+        for r in c.reviewers:
+            if r is not all_reviewers:
+                all_reviewers[r] = 0
         if scenario is 'scenario1' or 'scenario2':
-            all_reviewers.append(authors_p)
+            for a in c.authors:
+                if a is not all_reviewers:
+                    all_reviewers[a] = 0
+
         for file_path_p in file_paths_p:
             for file_path_t in file_paths_t:
                 for r in reviewers_p:
-                    r.score += string_compare(file_path_p, file_path_t, method)
+                    all_reviewers[r] += string_compare(file_path_p, file_path_t, method)
                 if scenario is 'scenario1' or 'scenario2':
                     for a in authors_p:
-                        a.score += string_compare(file_path_p, file_path_t, method)
+                        if a in all_reviewers:
+                            all_reviewers[a] += string_compare(file_path_p, file_path_t, method)
+
+    return all_reviewers
+
+
