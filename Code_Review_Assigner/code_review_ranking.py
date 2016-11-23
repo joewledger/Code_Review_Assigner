@@ -114,8 +114,9 @@ def code_review_ranking(id, commitHistory, **kwargs):
                 if scenario is 'scenario1' or 'scenario3':
                     for a in authors_p:
                         if a in all_reviewers:
-                            for fpp in file_path_p:
-                                all_reviewers[a] += string_compare(fpp, fpt, method) # increment score
+                            for fpt in file_path_t:
+                                for fpp in file_path_p:
+                                    all_reviewers[a] += string_compare(fpp, fpt, method) # increment score
     return all_reviewers
 
 
