@@ -16,7 +16,8 @@ class commitHistory(object):
 
 
     # Gets all previous commits by parent relationship to origin
-    def get_commits_in_tree(self, commitID, tree=set()):
+    def get_commits_in_tree(self, commitID):
+        tree = set()
         current_commits = Queue()
         current_commits.put(self.commitIDMap[commitID])
 
