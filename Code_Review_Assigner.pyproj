@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>36739eb6-782a-4f0c-99f6-9f40a20fa79e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Code_Review_Assigner.py</StartupFile>
+    <StartupFile>Code_Review_Assigner\Code_Review_Assigner.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,14 +22,21 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Code_Review_Assigner.py" />
-    <Compile Include="code_review_ranking.py" />
-    <Compile Include="commitHistory.py" />
-    <Compile Include="parse_git_log.py" />
-    <Compile Include="string_compare.py" />
-    <Compile Include="__init__.py">
+    <Compile Include="Code_Review_Assigner\code_review_ranking.py" />
+    <Compile Include="Code_Review_Assigner\commitHistory.py" />
+    <Compile Include="Code_Review_Assigner\evaluation.py" />
+    <Compile Include="Code_Review_Assigner\parse_git_log.py" />
+    <Compile Include="Code_Review_Assigner\string_compare.py" />
+    <Compile Include="Code_Review_Assigner\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="main.py" />
+    <Compile Include="Tests\test_commit_history.py" />
+    <Compile Include="Tests\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Code_Review_Assigner\" />
+    <Folder Include="Tests\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
