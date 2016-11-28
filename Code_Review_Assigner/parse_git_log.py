@@ -41,7 +41,7 @@ def parse(folderPath):
 
         for line in metadatum[3].split('\n'):
             if "Reviewed-by: " in line:
-                nextcommit.reviewers.add(line[len("Reviewed-by: "):])
+                nextcommit.reviewers.add(line[len("Reviewed-by: "):].split(" <")[0])
 
         nextcommit.filePathsChanged = list(filter(None, files[idx]))
         nextcommit.parents = list(filter(None, metadatum[4].split(' ')))
