@@ -19,7 +19,7 @@ class TestParseMethods(unittest.TestCase):
         previous_count_by_guid['ace7b33285e534ebbad54037b694087192c694ce'] = 9
         previous_count_by_guid['43f6c69eed3ad19e621bf4b42c17cca62f552b6d'] = 10
         
-        testHistory = pgl.parse(os.getcwd() + '\\Code-Review-Tests\\')
+        testHistory = pgl.parse(os.getcwd() + '\\samplerepo\\')
         for c in previous_count_by_guid:
             prevCount = testHistory.get_previous_commits(c)
             self.assertEqual(len(prevCount), previous_count_by_guid[c])
@@ -38,7 +38,7 @@ class TestParseMethods(unittest.TestCase):
         commits_in_tree_by_guid['ace7b33285e534ebbad54037b694087192c694ce'] = 7
         commits_in_tree_by_guid['43f6c69eed3ad19e621bf4b42c17cca62f552b6d'] = 10
         
-        testHistory = pgl.parse(os.getcwd() + '\\Code-Review-Tests\\')
+        testHistory = pgl.parse(os.getcwd() + '\\samplerepo\\')
         for c in commits_in_tree_by_guid:
             treeCount = testHistory.get_commits_in_tree(c)
             self.assertEqual(len(treeCount), commits_in_tree_by_guid[c])
