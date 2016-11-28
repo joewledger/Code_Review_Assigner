@@ -30,7 +30,7 @@ def main():
         if args.repo:
             if args.commitguid:
                 history = pgl.parse(os.getcwd() + "//" + args.repo + "//")
-                reviewers = crr.code_review_ranking(args.commitguid, history, method="LCSubseq", scenario="scenario4")
+                reviewers = crr.code_review_ranking(args.commitguid, history)
                 sortedReviewers = sorted(reviewers, key=reviewers.__getitem__, reverse=True)[:args.k]
                 for r in sortedReviewers:
                     print("{0:0.1f}".format(reviewers[r]),":",r)

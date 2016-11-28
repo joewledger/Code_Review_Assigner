@@ -6,7 +6,7 @@
     <ProjectGuid>36739eb6-782a-4f0c-99f6-9f40a20fa79e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
     <StartupFile>main.py</StartupFile>
-    <SearchPath>.</SearchPath>
+    <SearchPath>.;Code_Review_Assigner\;Tests\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Code_Review_Assigner</Name>
