@@ -1,13 +1,15 @@
 from collections import *
 from queue import Queue
 
+import parse_git_log as pgl
 
 class commitHistory(object):
     """description of class"""
 
-    def __init__(self):
+    def __init__(self, folderPath):
         # Commits are ordered by their timestamp
         self.commitIDMap = OrderedDict()
+        self.folderPath = folderPath
 
     # Gets all previous commits (as indicated by the commits timestamp).
     def get_previous_commits(self, commit_id):
@@ -17,17 +19,7 @@ class commitHistory(object):
 
     # Gets all previous commits by parent relationship to origin
     def get_commits_in_tree(self, commitID):
-        tree = set()
-        current_commits = Queue()
-        current_commits.put(self.commitIDMap[commitID])
-
-        while(not current_commits.empty()):
-            commit = current_commits.get()
-            for parent in commit.parents:
-                tree.add(parent)
-                current_commits.put(self.commitIDMap[parent])
-
-        return tree
+        return pgl.revlist(self.folderPath, commitID)
 
     def get_commit_ids_with_reviewers(self):
         return [x for x in self.commitIDMap if len(self.commitIDMap[x].reviewers) > 0]

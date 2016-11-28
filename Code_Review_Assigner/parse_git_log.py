@@ -28,7 +28,7 @@ def parse(folderPath):
 
     files = [commit.split('\x1f')[1].split('\n') if len(commit.split('\x1f')) > 1 else '' for commit in commits]
     
-    history = commitHistory()
+    history = commitHistory(folderPath)
     
     for idx, metadatum in enumerate(metadata):
         if(metadatum[0] == ''):
@@ -48,5 +48,12 @@ def parse(folderPath):
         history.commitIDMap[nextcommit.id] = nextcommit
     
     return history
+
+def revlist(folderPath, commitid):
+    pr = subprocess.Popen( 'git rev-list %s' % commitid , cwd = os.path.dirname( folderPath ), shell = True, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
+    (out,err) = pr.communicate()
+    
+    commits = list(filter(None,out.decode('utf-8').split('\n')))[1:]
+    return commits
 
 if __name__ == '__main__': parse('../help/')
