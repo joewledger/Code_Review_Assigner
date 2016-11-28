@@ -5,13 +5,16 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>36739eb6-782a-4f0c-99f6-9f40a20fa79e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Tests\test_commit_history.py</StartupFile>
+    <StartupFile>main.py</StartupFile>
     <SearchPath>.</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Code_Review_Assigner</Name>
     <RootNamespace>Code_Review_Assigner</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments> -r help -c c75a1cde49dde5d78b2e640b382fbd3c1d103be6</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
