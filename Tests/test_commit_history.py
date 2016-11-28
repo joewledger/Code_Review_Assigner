@@ -3,7 +3,7 @@ import Code_Review_Assigner.parse_git_log as pgl
 import unittest
 import Code_Review_Assigner.commitHistory as ch
 
-class TestParseMethods(unittest.TestCase):
+class TestCommitHistoryMethods(unittest.TestCase):
 
     def test_getPreviousCommitsInTree(self):
         previous_count_by_guid = {}
