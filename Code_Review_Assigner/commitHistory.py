@@ -29,12 +29,12 @@ class commitHistory(object):
 
         return tree
 
-    def get_kth_commit_id(self, k):
-        return list(self.commitIDMap.items())[k][0]
+    def get_commit_ids_with_reviewers(self):
+        return [x for x in self.commitIDMap if len(self.commitIDMap[x].reviewers) > 0]
 
-    def get_last_commit(self):
-        return self.get_kth_commit_id(-1)
 
+    def __getitem__(self, id):
+        return self.commitIDMap[id]
 
     def __str__(self):
         return "Commit history with %d commits" % len(self.commitIDMap)

@@ -1,12 +1,10 @@
 from commitHistory import Commit
-from string_compare import *
+import string_compare
 
 #                                 branch sensitive?
 #    include          [1. branch,contrib ] [3. !branch,contrib ]
 #    contributors?    [2. branch,!contrib] [4. !branch,!contrib]
-def code_review_ranking(id, commitHistory, **kwargs):
-    method = kwargs.get('method')
-    scenario = kwargs.get('scenario')
+def code_review_ranking(id, commitHistory, string_compare_method=string_compare.LCP, scenario='scenario1'):
     all_reviewers = dict()
     commit_t = commitHistory.commitIDMap[id]  # target commit
     if scenario is ('scenario1' or 'scenario2'):
@@ -33,11 +31,11 @@ def code_review_ranking(id, commitHistory, **kwargs):
         for file_path_p in file_paths_p:
             for file_path_t in file_paths_t:
                 for r in reviewers_p:
-                    all_reviewers[r] += string_compare(file_path_p, file_path_t, method=method) / (len_p * len_t) # increment score
+                    all_reviewers[r] += string_compare_method(file_path_p, file_path_t) / (len_p * len_t)
                 if scenario is ('scenario1' or 'scenario3'):
                     for a in authors_p:
                         if a in all_reviewers:
-                            all_reviewers[a] += string_compare(file_path_p, file_path_t, method=method) / (len_p * len_t) # increment score
+                            all_reviewers[a] += string_compare_method(file_path_p, file_path_t) / (len_p * len_t)
     return all_reviewers
 
 
