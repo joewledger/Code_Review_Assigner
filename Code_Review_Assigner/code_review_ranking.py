@@ -9,13 +9,14 @@ def code_review_ranking(id, commitHistory, **kwargs):
     scenario = kwargs.get('scenario')
     all_reviewers = dict()
     commit_t = commitHistory.commitIDMap[id]  # target commit
-    if scenario is 'scenario1' or 'scenario2':
+    if scenario is ('scenario1' or 'scenario2'):
         commits_p = commitHistory.get_commits_in_tree(id)  # all past commits set
     else:
         commits_p = commitHistory.get_previous_commits(id)  # all past commits by time set
     file_paths_t = commit_t.filePathsChanged  # file paths changed of target commits
     len_t = len(file_paths_t) # for normalization
-    for c in commits_p:
+    for id_p in commits_p:
+        c = commitHistory.commitIDMap[id_p]
         file_paths_p = c.filePathsChanged  # set of past file path changed
         reviewers_p = c.reviewers  # set of past reviewers
         authors_p = c.authors  # set of past authors
@@ -23,7 +24,7 @@ def code_review_ranking(id, commitHistory, **kwargs):
         for r in c.reviewers:
             if r not in all_reviewers:
                 all_reviewers[r] = 0
-        if scenario is 'scenario1' or 'scenario3':
+        if scenario is ('scenario1' or 'scenario3'):
             for a in c.authors:
                 if a not in all_reviewers:
                     all_reviewers[a] = 0
@@ -32,11 +33,11 @@ def code_review_ranking(id, commitHistory, **kwargs):
         for file_path_p in file_paths_p:
             for file_path_t in file_paths_t:
                 for r in reviewers_p:
-                    all_reviewers[r] += string_compare(file_path_p, file_path_t, method) / (len_p * len_t) # increment score
-                if scenario is 'scenario1' or 'scenario3':
+                    all_reviewers[r] += string_compare(file_path_p, file_path_t, method=method) / (len_p * len_t) # increment score
+                if scenario is ('scenario1' or 'scenario3'):
                     for a in authors_p:
                         if a in all_reviewers:
-                            all_reviewers[a] += string_compare(file_path_p, file_path_t, method) / (len_p * len_t) # increment score
+                            all_reviewers[a] += string_compare(file_path_p, file_path_t, method=method) / (len_p * len_t) # increment score
     return all_reviewers
 
 
