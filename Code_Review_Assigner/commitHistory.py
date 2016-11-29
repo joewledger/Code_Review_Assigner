@@ -14,12 +14,16 @@ class commitHistory(object):
     # Gets all previous commits (as indicated by the commits timestamp).
     def get_previous_commits(self, commit_id):
         idx = list(self.commitIDMap).index(commit_id)
-        return set(list(self.commitIDMap)[0:idx])
+        all = set(list(self.commitIDMap)[0:idx])
+        withreviewers = [x for x in all if len(self.commitIDMap[x].reviewers) > 0]
+        return withreviewers
 
 
     # Gets all previous commits by parent relationship to origin
     def get_commits_in_tree(self, commitID):
-        return pgl.revlist(self.folderPath, commitID)
+        all = pgl.revlist(self.folderPath, commitID)
+        withreviewers = [x for x in all if len(self.commitIDMap[x].reviewers) > 0]
+        return withreviewers
 
     def get_commit_ids_with_reviewers(self):
         return [x for x in self.commitIDMap if len(self.commitIDMap[x].reviewers) > 0]
