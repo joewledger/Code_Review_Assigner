@@ -32,19 +32,16 @@ def calculate_average_accuracy_for_sliding_window_k(repo_name, scenario="scenari
 
     accuracy_scores = {k: 0.0 for k in k_values}
 
-    for k in k_values:
-        for commit_id in commit_ids_with_reviewers:
-            recommendations = sorted_recommendations(crr.code_review_ranking(commit_id, history, scenario=scenario,
+    for commit_id in commit_ids_with_reviewers:
+        recommendations = sorted_recommendations(crr.code_review_ranking(commit_id, history, scenario=scenario,
                                                                  string_compare_method=string_compare_method))
+        reviewer = list(history[commit_id].reviewers)[0]
 
-            reviewer = list(history[commit_id].reviewers)[0]
-
+        for k in k_values:
             if(reviewer in recommendations[:k]):
                 accuracy_scores[k] += 1
 
-        accuracy_scores[k] /= len(commit_ids_with_reviewers)
-
-    return accuracy_scores
+    return {k: accuracy_scores[k] / len(commit_ids_with_reviewers) for k in k_values}
 
 
 def sorted_recommendations(recommendations):
