@@ -37,5 +37,3 @@ def code_review_ranking(id, commitHistory, string_compare_method=string_compare.
                         if a in all_reviewers:
                             all_reviewers[a] += string_compare_method(file_path_p, file_path_t) / (len_p * len_t)
     return all_reviewers
-
-
