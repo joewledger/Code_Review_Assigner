@@ -9,7 +9,7 @@ import subprocess
 import os
 import sys
 from datetime import datetime
-from commitHistory import *
+import commitHistory as ch
 
 def parse(folderPath):
     # https://git-scm.com/docs/git-log search "format:<string>"
@@ -28,13 +28,13 @@ def parse(folderPath):
 
     files = [commit.split('\x1f')[1].split('\n') if len(commit.split('\x1f')) > 1 else '' for commit in commits]
     
-    history = commitHistory(folderPath)
+    history = ch.commitHistory(folderPath)
     
     for idx, metadatum in enumerate(metadata):
         if(metadatum[0] == ''):
             continue
         
-        nextcommit = Commit(metadatum[0])
+        nextcommit = ch.Commit(metadatum[0])
         # https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
         nextcommit.timestamp = datetime.strptime(metadatum[1],'%a %b %d %H:%M:%S %Y %z')
         nextcommit.authors.add(metadatum[2])
