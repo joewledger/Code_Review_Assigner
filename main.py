@@ -50,9 +50,9 @@ def main():
         plt.plot_average_position("plots/%s_ranking.png" % args.repo, args.repo, limit=args.samplesize)
 
     elif(args.command == "accuracy"):
-        range = args._get_kwargs.split(',')
-        min = int(range[0])
-        max = int(range[1])
+        minmax = args.k.split(',')
+        min = int(minmax[0])
+        max = int(minmax[1])
         plt.plot_average_k_acccuracy("plots/%s_accuracy.png" % args.repo, args.repo, k_values=range(min, max), limit=args.samplesize)
 
 def checkout_all(submodule_dir):
