@@ -20,6 +20,7 @@ def plot_average_position(savefile, repo_name, limit=None):
     axes.set_xticklabels(tuple(labels))
 
     plt.savefig(savefile)
+    plt.close()
 
 
 def plot_average_k_acccuracy(savefile, repo_name, limit=None, k_values=range(1, 10)):
@@ -42,6 +43,7 @@ def plot_average_k_acccuracy(savefile, repo_name, limit=None, k_values=range(1, 
     labels = ["Exclude not-in-tree, Add Author","Follow tree","Add Author","Control"]
     plt.legend(labels, loc="lower right")
     plt.savefig(savefile)
+    plt.close()
 
 
 if __name__ == "__main__":
