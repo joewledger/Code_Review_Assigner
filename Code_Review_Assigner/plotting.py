@@ -14,9 +14,10 @@ def plot_average_position(savefile, repo_name, limit=None):
     values = [evaluation.calculate_average_ground_truth_position(repo_name, scenario=s, limit=limit) for s in scenarios]
 
     axes.bar(ind + width / 2, values, width)
-    axes.set_title("Average ranking of ground truth reviewer (%s dataset)" % repo_name[:-1])
+    axes.set_title("Average ranking of ground truth reviewer (%s dataset)" % repo_name)
     axes.set_xticks(ind + width)
-    axes.set_xticklabels(tuple(scenarios))
+    labels = ["Add author,\nExclude not-in-tree","Exclude not-in-tree","Add Author","Control"]
+    axes.set_xticklabels(tuple(labels))
 
     plt.savefig(savefile)
 
@@ -35,10 +36,11 @@ def plot_average_k_acccuracy(savefile, repo_name, limit=None, k_values=range(1, 
 
     axes.set_xlabel("k")
     axes.set_ylabel("Average Accuracy")
-    axes.set_title("Average accuracy of methods (%s dataset)" % repo_name[:-1])
+    axes.set_title("Average accuracy of methods (%s dataset)" % repo_name)
     axes.set_ylim((0.0, 1.1))
 
-    plt.legend(scenarios)
+    labels = ["Exclude not-in-tree, Add Author","Follow tree","Add Author","Control"]
+    plt.legend(labels, loc="lower right")
     plt.savefig(savefile)
 
 

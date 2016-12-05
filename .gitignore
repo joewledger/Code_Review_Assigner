@@ -365,3 +365,6 @@ __pycache__/
 
 ### VisualStudio Patch ###
 build/
+
+# Code Review Assigner
+plots/

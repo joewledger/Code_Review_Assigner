@@ -1,5 +1,6 @@
 from collections import *
 from queue import Queue
+import random
 
 import parse_git_log as pgl
 
@@ -25,8 +26,11 @@ class commitHistory(object):
         withreviewers = [x for x in all if len(self.commitIDMap[x].reviewers) > 0]
         return withreviewers
 
-    def get_commit_ids_with_reviewers(self):
-        return [x for x in self.commitIDMap if len(self.commitIDMap[x].reviewers) > 0]
+    def get_commit_ids_with_reviewers(self, limit=None):
+        withids = [x for x in self.commitIDMap if len(self.commitIDMap[x].reviewers) > 0]
+        if(limit):
+            withids = random.sample(withids, limit)
+        return withids
 
 
     def __getitem__(self, id):

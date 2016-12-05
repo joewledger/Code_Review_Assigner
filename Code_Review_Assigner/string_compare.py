@@ -28,7 +28,7 @@ def LCSuff(f1, f2):
     f2 = path2List(f2)
     common_path = 0
     r = range(min(len(f1), len(f2)))
-    r.reverse()
+    r = reversed(r)
     for i in r:
         if f1[i] == f2[i]:
             common_path += 1

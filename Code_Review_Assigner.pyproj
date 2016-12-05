@@ -13,7 +13,7 @@
     <RootNamespace>Code_Review_Assigner</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments> -r help -c c75a1cde49dde5d78b2e640b382fbd3c1d103be6</CommandLineArguments>
+    <CommandLineArguments>ranking -r qtquickcontrols2 -s 100</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -29,6 +29,7 @@
     <Compile Include="Code_Review_Assigner\commitHistory.py" />
     <Compile Include="Code_Review_Assigner\evaluation.py" />
     <Compile Include="Code_Review_Assigner\parse_git_log.py" />
+    <Compile Include="Code_Review_Assigner\plotting.py" />
     <Compile Include="Code_Review_Assigner\string_compare.py" />
     <Compile Include="Code_Review_Assigner\__init__.py">
       <SubType>Code</SubType>
