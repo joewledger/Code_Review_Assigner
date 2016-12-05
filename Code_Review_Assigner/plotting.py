@@ -46,5 +46,8 @@ if __name__ == "__main__":
     submodules = ["qtquickcontrols2", "online", "impress_remote", "help"]
 
     for s in submodules:
-        plot_average_position("plots/%s_ranking.png" % s, s + "/")
-        plot_average_k_acccuracy("plots/%s_accuracy.png" % s, s + "/")
+        try:
+            plot_average_position("plots/%s_ranking.png" % s, s + "/")
+            plot_average_k_acccuracy("plots/%s_accuracy.png" % s, s + "/")
+        except:
+            print(s)
