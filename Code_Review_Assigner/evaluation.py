@@ -1,14 +1,12 @@
 import code_review_ranking as crr
 import parse_git_log as pgl
 import string_compare as sc
+import os
 
 
 def calculate_average_ground_truth_position(repo_name, scenario="scenario3", string_compare_method=sc.LCP, limit=None):
-    history = pgl.parse(repo_name)
-    commit_ids_with_reviewers = history.get_commit_ids_with_reviewers()
-
-    if(limit):
-        commit_ids_with_reviewers = commit_ids_with_reviewers[-limit:]
+    history = pgl.parse(os.getcwd() + "//" + repo_name + "//")
+    commit_ids_with_reviewers = history.get_commit_ids_with_reviewers(limit)
 
     running_sum = 0
     for commit_id in commit_ids_with_reviewers:
@@ -24,11 +22,8 @@ def calculate_average_ground_truth_position(repo_name, scenario="scenario3", str
 
 
 def calculate_average_accuracy_for_sliding_window_k(repo_name, scenario="scenario3", string_compare_method=sc.LCP, k_values=range(1, 10), limit=None):
-    history = pgl.parse(repo_name)
-    commit_ids_with_reviewers = history.get_commit_ids_with_reviewers()
-
-    if(limit):
-        commit_ids_with_reviewers = commit_ids_with_reviewers[-limit:]
+    history = pgl.parse(os.getcwd() + "//" + repo_name + "//")
+    commit_ids_with_reviewers = history.get_commit_ids_with_reviewers(limit)
 
     accuracy_scores = {k: 0.0 for k in k_values}
 
