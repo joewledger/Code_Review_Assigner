@@ -33,13 +33,13 @@ At this point, you can generate a recommended reviewer set for a specific commit
 The purpose of the evaluation is to generate reviewer recommendations for the set of all reviews. Two evaluation techniques are available.
 
 ### Average ground truth position
-In this evaluation method, a bar graph is generated comparing the average position of the ground truth reviewer compared to the ordered list of recommended reviewers. Lower scores are better.
+In this evaluation method, a bar graph is generated comparing the average position of the ground truth reviewer compared to the ordered list of recommended reviewers. Use sample size argument ```-s``` to reduce runtime. Lower scores are better.
     
-    $ python3 ranking -r REPO
+    $ python3 ranking -r REPO [-s SAMPLESIZE]
 Results are saved in ```plots/REPO_ranking.png```
 
 ### Average accuracy for sliding window k
-In this evaluation method, a line graph is generated comparing the presence of the ground truth reviewer in the sliding-size ordered set of reviewers. Lower scores are better.
+In this evaluation method, a line graph is generated comparing the presence of the ground truth reviewer in the sliding-size ordered set of reviewers. Use sample size argument ```-s``` to reduce runtime. Lower scores are better.
     
-    $ python3 accuracy -r REPO [-k RANGE]
+    $ python3 accuracy -r REPO [-s SAMPLESIZE] [-k RANGE]
 Results are saved in ```plots/REPO_accuracy.png```
