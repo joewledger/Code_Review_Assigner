@@ -37,11 +37,15 @@ def parse(folderPath):
         nextcommit = ch.Commit(metadatum[0])
         # https://docs.python.org/2/library/datetime.html#strftime-and-strptime-behavior
         nextcommit.timestamp = datetime.strptime(metadatum[1],'%a %b %d %H:%M:%S %Y %z')
-        nextcommit.authors.add(metadatum[2])
+        author = metadatum[2]
+        author = "".join([x if ord(x) < 128 else '?' for x in author])
+        nextcommit.authors.add(author)
 
         for line in metadatum[3].split('\n'):
             if "Reviewed-by: " in line:
-                nextcommit.reviewers.add(line[len("Reviewed-by: "):].split(" <")[0])
+                name = line[len("Reviewed-by: "):].split(" <")[0]
+                name = "".join([x if ord(x) < 128 else '?' for x in name])
+                nextcommit.reviewers.add(name)
 
         nextcommit.filePathsChanged = list(filter(None, files[idx]))
         nextcommit.parents = list(filter(None, metadatum[4].split(' ')))
