@@ -42,7 +42,7 @@ def main():
         print("Reccomended Reviewers:")
         for r in sortedReviewers:
             print("{0:0.1f}".format(reviewers[r]),":",r)
-        groundtruth = min(history.commitIDMap[args.commitguid].reviewers) # literally one element
+        groundtruth = list(history.commitIDMap[args.commitguid].reviewers)[0] # literally one element
         print("\nGround Truth: " + groundtruth)
         print("Position of ground truth reviewer: " + str(sortedReviewers.index(groundtruth)+1))
 

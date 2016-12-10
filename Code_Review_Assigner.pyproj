@@ -13,7 +13,7 @@
     <RootNamespace>Code_Review_Assigner</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
     <LaunchProvider>Standard Python launcher</LaunchProvider>
-    <CommandLineArguments>ranking -r qtquickcontrols2 -s 100</CommandLineArguments>
+    <CommandLineArguments>reccomend -r help -c 002cb35f42378ed4f0bf3e7237958de20364f1a9</CommandLineArguments>
     <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
